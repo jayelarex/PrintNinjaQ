@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+
 @isset($columnHeadings)
     <ul class="list-group">
         <li class="list-group-item">
