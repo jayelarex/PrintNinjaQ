@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Transactions extends Model
-{
+class Transactions extends Model {
 
     public $timestamps = false;
 
@@ -43,10 +42,14 @@ class Transactions extends Model
     'Bank'
   ];
 
-
-
-  /**
-     * Get the user that owns the phone.
+    /**
+     * Define a relationship to the Banks model.
+     *
+     * This method establishes a "belongs to" relationship between the Transactions model
+     * and the Banks model. It links the 'BankId' column in the Transactions table
+     * to the 'BankId' column in the Banks table.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function Bank(): BelongsTo
     {

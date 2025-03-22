@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 
 class Example2Controller extends Controller {
+
     /**
          * Retrieves all transactions with their associated bank information
          * and returns the data as a JSON string in a pretty-printed format.

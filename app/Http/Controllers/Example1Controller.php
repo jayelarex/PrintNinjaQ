@@ -8,9 +8,25 @@ use Illuminate\Http\Request;
 
 
 class Example1Controller extends Controller {
+
     /**
-     * Show the profile for a given user.
-     */
+ * Handles the example1a request and generates a list of column headings.
+ *
+ * This method retrieves a 'number' query parameter from the request, generates
+ * a collection of column headings (e.g., "A", "B", "C", etc.) based on the number,
+ * and passes the data to the 'example1' view.
+ *
+ * @param \Illuminate\Http\Request $request The incoming HTTP request instance.
+ * @return \Illuminate\View\View The view containing the generated column headings.
+ *
+ * Query Parameters:
+ * - number (int): The number of column headings to generate.
+ *
+ * View Data:
+ * - columnHeadings (array): An array of generated column headings.
+ * - finalColumnHeading (string|null): The last column heading in the list, or null if none.
+ * - number (int): The input number used to generate the column headings.
+ */
     public function example1a(Request $request): View {
         $columnHeadings = collect([]);
 
@@ -18,7 +34,7 @@ class Example1Controller extends Controller {
         $i = 1;
         while ($i <= $number) {
             $columnHeadings->push(Coordinate::stringFromColumnIndex($i));
-         $i++;
+            $i++;
         }
 
         return view('example1', [
@@ -28,7 +44,7 @@ class Example1Controller extends Controller {
         ]);
     }
 
-   /**
+    /**
          * Generates a collection of Excel column headings and passes them to the view.
          *
          * This method creates a collection of Excel-style column headings (e.g., A, B, C, ..., Z, AA, AB, etc.)
@@ -39,9 +55,8 @@ class Example1Controller extends Controller {
          * @return \Illuminate\View\View The view 'example1' with the generated column headings.
          */
     public function example1b(): View {
-        
         $columnHeadings = collect([]);
-        $n = 235;
+        $number = $request->query('number');
         $i = 0;
 
     while ($i <= $n) {
@@ -50,7 +65,9 @@ class Example1Controller extends Controller {
     }
 
     return view('example1', [
-        'columnHeadings' => $columnHeadings->all()
+        'columnHeadings' => $columnHeadings->all(),
+        'finalColumnHeading' => $columnHeadings->last(),
+        'number' => $number
     ]);
     }
 
@@ -63,7 +80,6 @@ class Example1Controller extends Controller {
          * @return string The resulting string representation in base-26 encoding.
          */
     private function getExcelColumn($number): string {
-        
         for($r = ""; $number >= 0; $number = intval($number / 26) - 1) {
             $r = chr($number%26 + 0x41) . $r;
         }

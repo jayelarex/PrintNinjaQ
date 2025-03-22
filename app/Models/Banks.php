@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Banks extends Model
-{
+class Banks extends Model {
     public $timestamps = false;
 
      /**
@@ -37,4 +36,5 @@ class Banks extends Model
   protected $visible = [
     'BankName',
   ];
+
 }
